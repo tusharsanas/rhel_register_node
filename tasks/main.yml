@@ -1,0 +1,27 @@
+---
+- include_vars:
+    dir: 'vars'
+    files_matching: 'secrets.yml'
+
+- debug: msg={{ redhat_username }}
+
+- name: Register system with Red Hat
+  when:
+    - ansible_distribution == 'RedHat'
+    - redhat_username is defined
+    - redhat_password is defined
+  redhat_subscription:
+    force_register: false
+    state: present
+    username: "{{ redhat_username }}"
+    password: "{{ redhat_password }}"
+    pool_ids: "{{ redhat_subscription_poolid }}"
+  tags: register_system
+  register: register_system
+
+- name: Enable base RHEL 7 Repository
+  when:
+    - ansible_distribution == 'RedHat'
+    - register_system|changed
+  shell: subscription-manager repos --disable '*' && subscription-manager repos --enable rhel-7-server-rpms
+  tags: register_system

@@ -1,0 +1,1 @@
+rhel_register_node
