@@ -4,6 +4,7 @@
 - debug: msg={{ redhat_username }}
 
 - name: Register system with Red Hat
+  become: True
   when:
     - ansible_distribution == 'RedHat'
     - redhat_username is defined
@@ -18,6 +19,7 @@
   register: register_system
 
 - name: Enable base RHEL 7 Repository
+  become: True
   when:
     - ansible_distribution == 'RedHat'
     - register_system|changed
