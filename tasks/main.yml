@@ -1,9 +1,5 @@
 ---
-- debug: msg="{{ playbook_dir }}/vars/secrets.yml"
-
-- include_vars:
-    dir: 'vars'
-    files_matching: 'secrets.yml'
+- include_vars: "{{ playbook_dir }}/vars/secrets.yml"
 
 - debug: msg={{ redhat_username }}
 
