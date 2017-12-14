@@ -2,10 +2,14 @@
 - name: Check if secrets.yml exists
   stat: path="{{ playbook_dir }}/vars/secrets.yml"
   register: import_secrets_from_vars
+  delegate_to: localhost
+  run_once: "True"
 
 - include_vars: "{{ playbook_dir }}/vars/secrets.yml"
   tags: register_system
   when: import_secrets_from_vars.stat.exists == True
+  delegate_to: localhost
+  run_once: "True"
 
 - name: Backwards Compability to avoid failure
   include_tasks: backwards_compability.yml
