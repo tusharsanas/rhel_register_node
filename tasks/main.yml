@@ -4,6 +4,7 @@
   register: import_secrets_from_vars
   delegate_to: localhost
   run_once: "True"
+  ignore_errors: "True"
 
 - include_vars: "{{ playbook_dir }}/vars/secrets.yml"
   tags: register_system
