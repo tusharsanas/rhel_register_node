@@ -11,6 +11,7 @@
   when: import_secrets_from_vars.stat.exists == True
   delegate_to: localhost
   run_once: "True"
+  ignore_errors: "True"
 
 - name: Backwards Compability to avoid failure
   include_tasks: backwards_compability.yml
