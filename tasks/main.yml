@@ -24,9 +24,9 @@
   tags: register_system
 
 - name: Enable base RHEL 7 Repository
-  become: "True"
-  when:
-    - ansible_distribution == 'RedHat'
+  #become: "True"
+  #when:
+    #- ansible_distribution == 'RedHat'
     #- register_system|changed
   shell: subscription-manager repos --disable '*' && subscription-manager repos --enable rhel-7-server-rpms
   tags: register_system
